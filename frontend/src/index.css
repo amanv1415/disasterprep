@@ -10,70 +10,70 @@
     /* Indian Cultural Color Palette */
     --background: 48 100% 99%;
     --foreground: 230 15% 15%;
-    
+
     /* Primary - Saffron inspired */
     --primary: 24 100% 50%;
     --primary-foreground: 0 0% 100%;
     --primary-light: 28 100% 85%;
     --primary-dark: 20 100% 35%;
-    
+
     /* Secondary - Deep Navy */
     --secondary: 230 50% 25%;
     --secondary-foreground: 0 0% 100%;
     --secondary-light: 230 30% 85%;
-    
+
     /* Accent - Indian Green */
     --accent: 140 50% 45%;
     --accent-foreground: 0 0% 100%;
     --accent-light: 140 30% 85%;
-    
+
     /* Alert/Emergency - Vibrant Red */
     --emergency: 0 85% 55%;
     --emergency-foreground: 0 0% 100%;
     --emergency-light: 0 50% 90%;
-    
+
     /* Success - Fresh Green */
     --success: 120 60% 45%;
     --success-foreground: 0 0% 100%;
     --success-light: 120 30% 90%;
-    
+
     /* Warning - Golden Yellow */
     --warning: 45 95% 55%;
     --warning-foreground: 230 15% 15%;
     --warning-light: 45 60% 90%;
-    
+
     /* Card and UI Elements */
     --card: 0 0% 100%;
     --card-light: 48 60% 98%;
     --card-foreground: 230 15% 15%;
-    
+
     --popover: 0 0% 100%;
     --popover-foreground: 230 15% 15%;
-    
+
     --muted: 48 20% 95%;
     --muted-foreground: 230 10% 50%;
-    
+
     /* Borders and Inputs */
     --border: 48 30% 90%;
     --input: 48 30% 95%;
     --ring: 24 100% 50%;
-    
+
     --destructive: 0 85% 55%;
     --destructive-foreground: 0 0% 100%;
-    
+
     --radius: 0.75rem;
-    
+
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)));
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(230 60% 35%));
     --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
     --gradient-warm: linear-gradient(135deg, hsl(28 100% 85%) 0%, hsl(24 100% 50%) 100%);
-    
+
     /* Shadows */
     --shadow-soft: 0 4px 20px hsl(var(--primary) / 0.1);
     --shadow-medium: 0 8px 30px hsl(var(--secondary) / 0.15);
     --shadow-strong: 0 20px 40px hsl(var(--secondary) / 0.2);
-    
+
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -82,19 +82,19 @@
   .dark {
     --background: 230 30% 8%;
     --foreground: 48 100% 95%;
-    
+
     --primary: 24 100% 55%;
     --primary-foreground: 0 0% 100%;
-    
+
     --secondary: 230 50% 20%;
     --secondary-foreground: 48 100% 95%;
-    
+
     --card: 230 25% 12%;
     --card-foreground: 48 100% 95%;
-    
+
     --muted: 230 20% 15%;
     --muted-foreground: 48 30% 70%;
-    
+
     --border: 230 20% 20%;
     --input: 230 20% 15%;
   }
@@ -105,11 +105,27 @@
     @apply border-border;
   }
 
+  #root {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
-  
+
   .font-display {
     font-family: 'Poppins', system-ui, sans-serif;
   }
@@ -119,32 +135,159 @@
   .gradient-hero {
     background: var(--gradient-hero);
   }
-  
+
   .gradient-primary {
     background: var(--gradient-primary);
   }
-  
+
   .gradient-warm {
     background: var(--gradient-warm);
   }
-  
+
   .shadow-soft {
     box-shadow: var(--shadow-soft);
   }
-  
+
   .shadow-medium {
     box-shadow: var(--shadow-medium);
   }
-  
+
   .shadow-strong {
     box-shadow: var(--shadow-strong);
   }
-  
+
   .transition-smooth {
     transition: var(--transition-smooth);
   }
-  
+
   .transition-bounce {
     transition: var(--transition-bounce);
   }
+
+  /* Safe area padding for notched devices */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* Smooth page content below sticky navbar */
+  .page-content {
+    @apply pt-4 pb-8 sm:pt-6 sm:pb-12;
+  }
+
+  /* Responsive container padding override for tight mobile */
+  @media (max-width: 639px) {
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  /* Touch-friendly tap targets */
+  @media (pointer: coarse) {
+
+    button,
+    a,
+    [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* Focus visible styles for accessibility */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  /* Animate on scroll utility */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stagger children animations */
+  .stagger-children>* {
+    animation: fadeInUp 0.4s ease-out both;
+  }
+
+  .stagger-children>*:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+
+  .stagger-children>*:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .stagger-children>*:nth-child(3) {
+    animation-delay: 0.15s;
+  }
+
+  .stagger-children>*:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+
+  .stagger-children>*:nth-child(5) {
+    animation-delay: 0.25s;
+  }
+
+  .stagger-children>*:nth-child(6) {
+    animation-delay: 0.3s;
+  }
+
+  /* Pulse animation for SOS */
+  .pulse-emergency {
+    animation: pulseEmergency 2s infinite;
+  }
+
+  @keyframes pulseEmergency {
+
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 hsl(var(--emergency) / 0.4);
+    }
+
+    50% {
+      box-shadow: 0 0 0 12px hsl(var(--emergency) / 0);
+    }
+  }
+}
+
+/* Hide Clerk's built-in "Don't have an account?" / "Already have an account?" footer */
+.cl-footerAction {
+  display: none !important;
 }

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  AlertTriangle, 
-  Phone, 
-  MapPin, 
-  Clock, 
+import {
+  AlertTriangle,
+  Phone,
+  MapPin,
+  Clock,
   Volume2,
   Shield,
   Heart,
@@ -72,32 +72,32 @@ const Emergency = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-display font-bold mb-2 flex items-center gap-3">
-            <AlertTriangle className="h-8 w-8 text-emergency" />
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-display font-bold mb-1 sm:mb-2 flex items-center gap-2 sm:gap-3">
+            <AlertTriangle className="h-6 w-6 sm:h-8 sm:w-8 text-emergency" />
             {t("emergency.title")}
           </h1>
-          <p className="text-muted-foreground">{t("emergency.subtitle")}</p>
+          <p className="text-sm sm:text-base text-muted-foreground">{t("emergency.subtitle")}</p>
         </div>
 
         {/* Emergency Quick Actions */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8 stagger-children">
           {emergencyTypes.map((emergency, index) => (
             <Card key={index} className="cursor-pointer hover:shadow-medium transition-smooth group">
-              <CardContent className="p-6 text-center">
-                <div className={`w-16 h-16 rounded-full ${emergency.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-bounce`}>
-                  <emergency.icon className="h-8 w-8 text-white" />
+              <CardContent className="p-4 sm:p-6 text-center">
+                <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full ${emergency.color} flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-bounce`}>
+                  <emergency.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                 </div>
-                <h3 className="font-semibold mb-2">{emergency.type}</h3>
-                <Button 
-                  variant="outline" 
+                <h3 className="font-semibold text-xs sm:text-sm mb-2 leading-snug">{emergency.type}</h3>
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => window.open(`tel:${emergency.number}`)}
-                  className="w-full hover:bg-primary hover:text-primary-foreground"
+                  className="w-full hover:bg-primary hover:text-primary-foreground text-xs sm:text-sm"
                 >
-                  <Phone className="h-4 w-4 mr-2" />
+                  <Phone className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   {emergency.number}
                 </Button>
               </CardContent>
@@ -105,41 +105,40 @@ const Emergency = () => {
           ))}
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
           {/* Active Alerts */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             <Card className="shadow-soft">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   <Volume2 className="h-5 w-5 text-warning" />
                   {t("emergency.activeAlerts")}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3 sm:space-y-4">
                 {activeAlerts.map((alert) => (
-                  <div 
+                  <div
                     key={alert.id}
-                    className={`p-4 rounded-lg border cursor-pointer transition-smooth ${
-                      selectedAlert.id === alert.id 
-                        ? 'border-primary bg-primary/5' 
+                    className={`p-3 sm:p-4 rounded-lg border cursor-pointer transition-smooth ${selectedAlert.id === alert.id
+                        ? 'border-primary bg-primary/5'
                         : 'border-border hover:bg-muted/30'
-                    }`}
+                      }`}
                     onClick={() => setSelectedAlert(alert)}
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center gap-3">
-                        <alert.icon className="h-5 w-5 text-primary" />
-                        <div>
-                          <h4 className="font-semibold">{alert.title}</h4>
-                          <p className="text-sm text-muted-foreground">{alert.type}</p>
+                    <div className="flex items-start justify-between mb-2 gap-2">
+                      <div className="flex items-start sm:items-center gap-2 sm:gap-3 min-w-0">
+                        <alert.icon className="h-5 w-5 text-primary shrink-0 mt-0.5 sm:mt-0" />
+                        <div className="min-w-0">
+                          <h4 className="font-semibold text-sm sm:text-base leading-snug">{alert.title}</h4>
+                          <p className="text-xs sm:text-sm text-muted-foreground">{alert.type}</p>
                         </div>
                       </div>
-                      <Badge className={getSeverityColor(alert.severity)}>
+                      <Badge className={`${getSeverityColor(alert.severity)} shrink-0 text-xs`}>
                         {alert.severity}
                       </Badge>
                     </div>
-                    <p className="text-sm mb-3">{alert.description}</p>
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                    <p className="text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2">{alert.description}</p>
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs text-muted-foreground">
                       <span className="flex items-center gap-1">
                         <MapPin className="h-3 w-3" />
                         {alert.location}
@@ -156,22 +155,22 @@ const Emergency = () => {
 
             {/* Alert Details */}
             {selectedAlert && (
-              <Card className="shadow-soft mt-6">
+              <Card className="shadow-soft">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                  <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                     <selectedAlert.icon className="h-5 w-5 text-primary" />
                     {t("emergency.alertDetails")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <h3 className="font-semibold text-lg mb-2">{selectedAlert.title}</h3>
-                  <p className="text-muted-foreground mb-4">{selectedAlert.description}</p>
-                  
-                  <h4 className="font-semibold mb-3">{t("emergency.recommendedActions")}</h4>
+                  <h3 className="font-semibold text-base sm:text-lg mb-2">{selectedAlert.title}</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground mb-4">{selectedAlert.description}</p>
+
+                  <h4 className="font-semibold text-sm sm:text-base mb-3">{t("emergency.recommendedActions")}</h4>
                   <ul className="space-y-2">
                     {selectedAlert.actions.map((action, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-primary" />
+                      <li key={index} className="flex items-start gap-2">
+                        <div className="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0" />
                         <span className="text-sm">{action}</span>
                       </li>
                     ))}
@@ -181,34 +180,35 @@ const Emergency = () => {
             )}
           </div>
 
-          {/* Quick Tips */}
-          <div>
+          {/* Sidebar: Tips + SOS */}
+          <div className="space-y-4 sm:space-y-6">
+            {/* Quick Tips */}
             <Card className="shadow-soft">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   <Shield className="h-5 w-5 text-accent" />
                   {t("emergency.quickSafetyTips")}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-2 sm:space-y-3">
                 {quickTips.map((tip, index) => (
-                  <div key={index} className="p-3 rounded-lg bg-muted/30 border border-border">
-                    <p className="text-sm">{tip}</p>
+                  <div key={index} className="p-2.5 sm:p-3 rounded-lg bg-muted/30 border border-border">
+                    <p className="text-xs sm:text-sm leading-relaxed">{tip}</p>
                   </div>
                 ))}
               </CardContent>
             </Card>
 
             {/* SOS Button */}
-            <Card className="shadow-soft mt-6">
-              <CardContent className="p-6 text-center">
-                <h3 className="font-semibold mb-4">{t("emergency.emergencySOS")}</h3>
-                <Button 
-                  size="lg" 
-                  className="w-full bg-emergency hover:bg-emergency/90 text-emergency-foreground py-6 text-lg font-semibold shadow-strong"
+            <Card className="shadow-soft">
+              <CardContent className="p-5 sm:p-6 text-center">
+                <h3 className="font-semibold text-sm sm:text-base mb-3 sm:mb-4">{t("emergency.emergencySOS")}</h3>
+                <Button
+                  size="lg"
+                  className="w-full bg-emergency hover:bg-emergency/90 text-emergency-foreground py-5 sm:py-6 text-base sm:text-lg font-semibold shadow-strong pulse-emergency"
                   onClick={() => alert("SOS feature would trigger emergency protocols")}
                 >
-                  <AlertTriangle className="h-6 w-6 mr-2" />
+                  <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 mr-2" />
                   {t("emergency.sosButton")}
                 </Button>
                 <p className="text-xs text-muted-foreground mt-2">

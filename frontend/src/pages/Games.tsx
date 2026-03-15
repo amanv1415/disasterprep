@@ -3,11 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { 
-  GamepadIcon, 
-  Play, 
-  Trophy, 
-  Star, 
+import {
+  GamepadIcon,
+  Play,
+  Trophy,
+  Star,
   Clock,
   Users,
   Target,
@@ -48,7 +48,7 @@ const Games = () => {
       title: t("games.memoryGame"),
       description: t("games.memoryGameDesc"),
       difficulty: t("games.easy"),
-      duration: "5-10 min", 
+      duration: "5-10 min",
       category: "Memory",
       icon: Brain,
       color: "bg-accent",
@@ -106,68 +106,67 @@ const Games = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-display font-bold mb-2 flex items-center gap-3">
-            <GamepadIcon className="h-8 w-8 text-primary" />
+      <div className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-display font-bold mb-1.5 sm:mb-2 flex items-center gap-2 sm:gap-3">
+            <GamepadIcon className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
             {t("games.title")}
           </h1>
-          <p className="text-muted-foreground">{t("games.subtitle")}</p>
+          <p className="text-sm sm:text-base text-muted-foreground">{t("games.subtitle")}</p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
           {/* Games List */}
           <div className="lg:col-span-2">
-            <div className="grid gap-6">
+            <div className="grid gap-4 sm:gap-6 stagger-children">
               {games.map((game) => (
-                <Card 
-                  key={game.id} 
-                  className={`shadow-soft cursor-pointer transition-smooth hover:shadow-medium ${
-                    selectedGame === game.id ? 'ring-2 ring-primary' : ''
-                  }`}
+                <Card
+                  key={game.id}
+                  className={`shadow-soft cursor-pointer transition-smooth hover:shadow-medium ${selectedGame === game.id ? 'ring-2 ring-primary' : ''
+                    }`}
                   onClick={() => setSelectedGame(game.id)}
                 >
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className={`w-16 h-16 rounded-lg ${game.color} flex items-center justify-center`}>
-                        <game.icon className="h-8 w-8 text-white" />
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                      <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-lg ${game.color} flex items-center justify-center shrink-0`}>
+                        <game.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
                       </div>
-                      
-                      <div className="flex-1">
-                        <div className="flex items-start justify-between mb-2">
-                          <h3 className="text-xl font-semibold">{game.title}</h3>
-                          <Badge className={getDifficultyColor(game.difficulty)}>
+
+                      <div className="flex-1 min-w-0 w-full">
+                        <div className="flex items-start justify-between gap-2 mb-1.5 sm:mb-2">
+                          <h3 className="text-base sm:text-xl font-semibold leading-snug">{game.title}</h3>
+                          <Badge className={`${getDifficultyColor(game.difficulty)} shrink-0 text-xs`}>
                             {game.difficulty}
                           </Badge>
                         </div>
-                        
-                        <p className="text-muted-foreground mb-4">{game.description}</p>
-                        
-                        <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground mb-4">
+
+                        <p className="text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-2">{game.description}</p>
+
+                        <div className="grid grid-cols-2 gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">
                           <div className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {game.duration}
+                            <Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+                            <span className="truncate">{game.duration}</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <Users className="h-4 w-4" />
-                            {game.players}
+                            <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+                            <span className="truncate">{game.players}</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <Star className="h-4 w-4" />
+                            <Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
                             {game.rating}/5.0
                           </div>
                           <div className="flex items-center gap-1">
-                            <Trophy className="h-4 w-4" />
-                            {game.completions} {t("games.completed")}
+                            <Trophy className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+                            <span className="truncate">{game.completions} {t("games.completed")}</span>
                           </div>
                         </div>
-                        
-                        <Button 
+
+                        <Button
                           onClick={(e) => {
                             e.stopPropagation();
                             startGame(game);
                           }}
-                          className="gradient-primary gap-2"
+                          className="gradient-primary gap-2 w-full sm:w-auto"
                         >
                           <Play className="h-4 w-4" />
                           {t("games.playGame")}
@@ -181,11 +180,11 @@ const Games = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Player Stats */}
             <Card className="shadow-soft">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   <Trophy className="h-5 w-5 text-primary" />
                   {t("games.yourProgress")}
                 </CardTitle>
@@ -193,21 +192,21 @@ const Games = () => {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between text-xs sm:text-sm mb-2">
                       <span>{t("games.overallProgress")}</span>
                       <span>65%</span>
                     </div>
                     <Progress value={65} className="h-2" />
                   </div>
-                  
-                  <div className="grid grid-cols-2 gap-4 text-center">
+
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4 text-center">
                     <div className="p-3 rounded-lg bg-muted/30">
-                      <div className="text-2xl font-bold text-primary">12</div>
-                      <div className="text-sm text-muted-foreground">{t("games.gamesPlayed")}</div>
+                      <div className="text-xl sm:text-2xl font-bold text-primary">12</div>
+                      <div className="text-xs sm:text-sm text-muted-foreground">{t("games.gamesPlayed")}</div>
                     </div>
                     <div className="p-3 rounded-lg bg-muted/30">
-                      <div className="text-2xl font-bold text-success">8,750</div>
-                      <div className="text-sm text-muted-foreground">{t("games.totalScore")}</div>
+                      <div className="text-xl sm:text-2xl font-bold text-success">8,750</div>
+                      <div className="text-xs sm:text-sm text-muted-foreground">{t("games.totalScore")}</div>
                     </div>
                   </div>
                 </div>
@@ -217,31 +216,28 @@ const Games = () => {
             {/* Achievements */}
             <Card className="shadow-soft">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   <Star className="h-5 w-5 text-primary" />
                   {t("games.achievements")}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-2 sm:space-y-3">
                 {achievements.map((achievement, index) => (
-                  <div 
+                  <div
                     key={index}
-                    className={`flex items-center gap-3 p-3 rounded-lg ${
-                      achievement.earned 
-                        ? 'bg-success/10 border border-success/20' 
+                    className={`flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 rounded-lg ${achievement.earned
+                        ? 'bg-success/10 border border-success/20'
                         : 'bg-muted/30 border border-border'
-                    }`}
+                      }`}
                   >
-                    <achievement.icon className={`h-5 w-5 ${
-                      achievement.earned ? 'text-success' : 'text-muted-foreground'
-                    }`} />
-                    <div className="flex-1">
-                      <div className={`font-medium text-sm ${
-                        achievement.earned ? 'text-success' : 'text-muted-foreground'
-                      }`}>
+                    <achievement.icon className={`h-4 w-4 sm:h-5 sm:w-5 shrink-0 ${achievement.earned ? 'text-success' : 'text-muted-foreground'
+                      }`} />
+                    <div className="flex-1 min-w-0">
+                      <div className={`font-medium text-xs sm:text-sm ${achievement.earned ? 'text-success' : 'text-muted-foreground'
+                        }`}>
                         {achievement.title}
                       </div>
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-xs text-muted-foreground truncate">
                         {achievement.description}
                       </div>
                     </div>
@@ -253,25 +249,24 @@ const Games = () => {
             {/* Leaderboard */}
             <Card className="shadow-soft">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                   <Trophy className="h-5 w-5 text-primary" />
                   {t("games.leaderboard")}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-2 sm:space-y-3">
                 {leaderboard.map((player) => (
-                  <div key={player.rank} className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/30 transition-smooth">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                      player.rank === 1 ? 'bg-warning text-warning-foreground' :
-                      player.rank === 2 ? 'bg-muted text-muted-foreground' :
-                      player.rank === 3 ? 'bg-warning/60 text-warning-foreground' :
-                      'bg-muted/50 text-muted-foreground'
-                    }`}>
+                  <div key={player.rank} className="flex items-center gap-2 sm:gap-3 p-2 rounded-lg hover:bg-muted/30 transition-smooth">
+                    <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold shrink-0 ${player.rank === 1 ? 'bg-warning text-warning-foreground' :
+                        player.rank === 2 ? 'bg-muted text-muted-foreground' :
+                          player.rank === 3 ? 'bg-warning/60 text-warning-foreground' :
+                            'bg-muted/50 text-muted-foreground'
+                      }`}>
                       {player.rank}
                     </div>
-                    <div className="text-lg">{player.avatar}</div>
-                    <div className="flex-1">
-                      <div className="font-medium text-sm">{player.name}</div>
+                    <div className="text-base sm:text-lg">{player.avatar}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-xs sm:text-sm truncate">{player.name}</div>
                       <div className="text-xs text-muted-foreground">{player.score} {t("games.pts")}</div>
                     </div>
                   </div>

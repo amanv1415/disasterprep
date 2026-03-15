@@ -8,6 +8,7 @@ interface AuthContextType {
     firstName: string | null
     lastName: string | null
     imageUrl: string
+    username: string | null
   } | null
   isSignedIn: boolean
   isLoaded: boolean
@@ -34,6 +35,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     firstName: clerkUser.firstName,
     lastName: clerkUser.lastName,
     imageUrl: clerkUser.imageUrl,
+    username: clerkUser.username,
   } : null
 
   const signOut = async () => {

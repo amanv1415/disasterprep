@@ -1,6 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
+import { Home, AlertTriangle } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 const NotFound = () => {
   const location = useLocation();
@@ -11,13 +14,21 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">{t("notFound.message")}</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          {t("notFound.returnHome")}
-        </a>
+    <div className="flex min-h-[60vh] items-center justify-center bg-background px-4">
+      <div className="text-center animate-fade-in-up max-w-md">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-warning/10 mb-6">
+          <AlertTriangle className="h-8 w-8 text-warning" />
+        </div>
+        <h1 className="mb-3 text-5xl sm:text-6xl font-display font-bold text-foreground">404</h1>
+        <p className="mb-6 text-base sm:text-lg text-muted-foreground leading-relaxed">
+          {t("notFound.message")}
+        </p>
+        <NavLink to="/">
+          <Button className="gradient-primary gap-2" size="lg">
+            <Home className="h-4 w-4" />
+            {t("notFound.returnHome")}
+          </Button>
+        </NavLink>
       </div>
     </div>
   );
