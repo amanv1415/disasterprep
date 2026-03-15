@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import ConstructionPopup from "./components/ConstructionPopup";
 
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -41,6 +42,7 @@ const App = () => (
               <Sonner />
               <BrowserRouter>
                 <ScrollToTop />
+                <ConstructionPopup />
                 <div className="min-h-screen bg-background flex flex-col">
                   <Routes>
                     <Route path="/login" element={<Login />} />
